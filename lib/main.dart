@@ -12,14 +12,63 @@ class Main extends StatelessWidget {
         primaryColor: Colors.red,
       ),
       home: Scaffold(
-        drawer: Drawer(
-          child: ListView(),
+        drawer: AppDrawer(),
+        body: CustomScrollView(
+          slivers: <Widget>[
+            SliverAppBar(
+              flexibleSpace: FlexibleSpaceBar(
+                title: Text('Новые задачи'),
+              ),
+            ),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) => ExerciseTile(),
+                childCount: 5,
+              ),
+            )
+          ],
         ),
-        appBar: AppBar(
-          title: Text("Новые задачи")
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {},
         ),
-        body: Text('Start'),
       ),
+    );
+  }
+}
+
+class AppDrawer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(children: [
+        DrawerHeader(
+          child: Container(),
+        ),
+        ListTile(
+          title: Text('Профиль'),
+        ),
+        ListTile(
+          title: Text('Категории'),
+        ),
+      ]),
+    );
+  }
+}
+
+class ExerciseTile extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text("2 + 2"),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Text("aa"),
+          ),
+        );
+      },
     );
   }
 }
